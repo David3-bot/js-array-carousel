@@ -1,4 +1,4 @@
-const images = [
+const imagesList = [
     "../img/01.webp",
     "../img/02.webp",
     "../img/03.webp",
@@ -8,29 +8,56 @@ const images = [
 
 let currentImgIndex = 0
 
-const sliderContainerEl = document.querySelector(".slider");
-const sliderImgEl = document.querySelector(".slider-img");
+const mainImgContainer = document.querySelector(".main-img-container");
 
-const btnNext = document.getElementById("slider-btn-prima");
-const btnPrev = document.getElementById("slider-btn-dopo");
+const btnNext = document.getElementById("btn_next");
+const btnPrev = document.getElementById("btn_prev");
 
-sliderImgEl.src = images[currentImgIndex];
 
-for (let i = 0; i < images.length; i++) {
 
-    let sliderImgEl = document.createElement("img");
-    sliderImgEl.src = images [i];
 
-    if (i === 0) {
-        sliderImgEl.classList.add("d-block");
+for (let i = 0; i < imagesList.length; i++) {
+
+    const currentImg = imagesList[i];
+
+
+    const imgEl = document.createElement("img");
+    imgEl.src = currentImg;
+    imgEl.classList.add("img-fluid");
+
+
+    const thumbEl = document.createElement("img");
+    thumbEl.src = currentImg;
+
+
+    if (i === currentImgIndex) {
+        imgEl.classList.add("active");
+
     }
 
-    sliderContainerEl.append(sliderImgEl);
-}
 
-btnNext.addEventListener("click"), function (){
-    const element = document.getElementById("slider-img");
-    element.classList.remove("d-none");
+    mainImgContainer.append(imgEl);
 
 }
 
+
+btnNext.addEventListener("click", function () {
+
+    currentImgIndex++;
+
+    const oldActiveEl = mainImgContainer.querySelector(".active");
+
+
+    oldActiveEl.classList.remove("active");
+
+
+
+    const imgElements = mainImgContainer.querySelectorAll("img");
+
+
+    const newActiveEl = imgElements[currentImgIndex];
+
+
+    newActiveEl.classList.add("active");
+
+}); 
